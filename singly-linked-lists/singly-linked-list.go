@@ -12,6 +12,10 @@ func (l *List) First() *Node {
 	return l.head
 }
 
+func (l *List) Last() *Node {
+	return l.tail
+}
+
 func (l *List) Push(val int) *List {
 	newNode := &Node{value: val}
 	if l.head == nil {
@@ -22,6 +26,26 @@ func (l *List) Push(val int) *List {
 	l.tail = newNode
 	l.length++
 	return l
+}
+
+func (l *List) Pop() *Node {
+	if l.length == 0 {
+		return nil
+	}
+	current := l.First()
+	newTail := current
+	for current.next != nil {
+		newTail = current
+		current = current.next
+	}
+	l.tail = newTail
+	l.tail.next = nil
+	if l.length == 0 {
+		l.head = nil
+		l.tail = nil
+	}
+	l.length--
+	return current
 }
 
 func (l *List) Traverse() {
@@ -58,4 +82,11 @@ func main() {
 	length := sll.length
 
 	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
+
+	firstPop := sll.Pop()
+	seconPop := sll.Pop()
+	fmt.Printf("First pop: %d\nSecond pop: %d\n", firstPop.value, seconPop.value)
+
+	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
+	sll.Traverse()
 }
