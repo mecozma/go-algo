@@ -13,7 +13,7 @@ class SinglyLinkedList {
     }
     Push(val) {
         var newNode = new Node(val);
-        if(!this.head) {
+        if (!this.head) {
             this.head = newNode;
             this.tail = this.head;
         } else {
@@ -24,3 +24,9 @@ class SinglyLinkedList {
         return this;
     }
 }
+
+let list = new SinglyLinkedList();
+list.Push("Hi");
+list.Push("There");
+list.Push("learner!");
+console.log(list);
