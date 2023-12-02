@@ -25,7 +25,7 @@ class SinglyLinkedList {
         return this;
     }
     Pop() {
-        if (this.length == 0) {
+        if (this.length === 0) {
             return undefined
         }
         var current = this.head;
@@ -41,7 +41,21 @@ class SinglyLinkedList {
             this.head = null;
             this.tail = null;
         }
-        return current.val;
+        return current;
+    }
+    Shift() {
+        if (this.length === 0) {
+            return undefined;
+        }
+
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if (this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+
     }
 }
 
@@ -49,12 +63,13 @@ let list = new SinglyLinkedList();
 list.Push("Hi");
 list.Push("There");
 list.Push("learner!");
-// console.log(list);
-console.log(list.Pop())
-console.log(list)
-console.log(list.Pop())
-console.log(list)
-console.log(list.Pop())
-console.log(list)
-console.log(list.Pop())
-console.log(list)
+console.log(list);
+console.log("shift", list.Shift())
+console.log(list);
+console.log("shift", list.Shift())
+console.log(list);
+console.log("shift", list.Shift())
+console.log(list);
+console.log("shift", list.Shift())
+list.Push("Hello")
+console.log(list);
