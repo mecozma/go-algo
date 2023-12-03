@@ -48,6 +48,33 @@ func (l *List) Pop() *Node {
 	return current
 }
 
+func (l *List) Shift() *Node {
+	if l.head == nil {
+		return nil
+	}
+	currentHead := l.First()
+	l.head = currentHead.next
+	l.length--
+	if l.length == 0 {
+		l.head = nil
+		l.tail = nil
+	}
+	return currentHead
+}
+
+func (l *List) Unshift(value int) *List {
+	newNode := &Node{value: value}
+	if l.First() == nil {
+		l.head = newNode
+		l.tail = l.head
+	} else {
+		newNode.next = l.head
+		l.head = newNode
+	}
+	l.length++
+	return l
+}
+
 func (l *List) Traverse() {
 	n := l.First()
 
@@ -83,9 +110,7 @@ func main() {
 
 	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
 
-	firstPop := sll.Pop()
-	seconPop := sll.Pop()
-	fmt.Printf("First pop: %d\nSecond pop: %d\n", firstPop.value, seconPop.value)
+	sll.Unshift(-1)
 
 	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
 	sll.Traverse()
