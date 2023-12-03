@@ -57,6 +57,18 @@ class SinglyLinkedList {
         }
 
     }
+    Unshift(val) {
+        var newNode = new Node(val);
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
 }
 
 let list = new SinglyLinkedList();
@@ -64,12 +76,5 @@ list.Push("Hi");
 list.Push("There");
 list.Push("learner!");
 console.log(list);
-console.log("shift", list.Shift())
-console.log(list);
-console.log("shift", list.Shift())
-console.log(list);
-console.log("shift", list.Shift())
-console.log(list);
-console.log("shift", list.Shift())
-list.Push("Hello")
+list.Unshift("Hey,")
 console.log(list);
