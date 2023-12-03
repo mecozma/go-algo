@@ -55,7 +55,7 @@ class SinglyLinkedList {
             this.head = null;
             this.tail = null;
         }
-
+        return currentHead;
     }
 }
 
