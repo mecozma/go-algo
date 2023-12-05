@@ -115,14 +115,11 @@ func main() {
 	sll.Push(3)
 	sll.Traverse()
 
-	head := sll.head
-	tail := sll.tail
-	length := sll.length
-
-	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
+	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", sll.head.value, sll.tail.value, sll.length)
 
 	sll.Unshift(-1)
+	sll.Unshift(-2)
 
-	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", head.value, tail.value, length)
+	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", sll.head.value, sll.tail.value, sll.length)
 	sll.Traverse()
 }
