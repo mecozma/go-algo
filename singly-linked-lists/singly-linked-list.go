@@ -96,6 +96,20 @@ func (l *List) Unshift(value int) *List {
 	return l
 }
 
+// Get method takes an index and return the node at the index or nil.
+func (l *List) Get(idx int) *Node {
+	if idx < 0 || idx > l.length {
+		return nil
+	}
+	currentNode := l.head
+	currentIdx := 0
+	for idx != currentIdx {
+		currentNode = currentNode.next
+		currentIdx++
+	}
+	return currentNode
+}
+
 // Node struct creates a new node for SLL.
 type Node struct {
 	value int
@@ -111,15 +125,9 @@ func main() {
 	sll := &List{}
 	sll.Push(0)
 	sll.Push(1)
-	sll.Push(2)
+	sll.Push(5)
 	sll.Push(3)
 	sll.Traverse()
 
-	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", sll.head.value, sll.tail.value, sll.length)
-
-	sll.Unshift(-1)
-	sll.Unshift(-2)
-
-	fmt.Printf("Head: %d\nTail: %d\nLength: %d\n", sll.head.value, sll.tail.value, sll.length)
-	sll.Traverse()
+	fmt.Println(sll.Get(2))
 }

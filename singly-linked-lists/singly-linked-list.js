@@ -79,12 +79,29 @@ class SinglyLinkedList {
         this.length++;
         return this;
     }
+
+    // Get method accepts an index and return the node at that index or null if there is no node at that index.
+    Get(idx) {
+        if (idx < 0 || idx > this.length) {
+            return null
+        }
+        var currentNode = this.head;
+        var currentIdx = 0;
+
+        while(idx != currentIdx) {
+            
+            currentNode = currentNode.next;
+            currentIdx++;
+        }
+        return currentNode
+    }
 }
 
 let list = new SinglyLinkedList();
-list.Push("Hi");
-list.Push("There");
-list.Push("learner!");
+list.Push(0);
+list.Push(1);
+list.Push(2);
+list.Push(3);
+list.Push(4);
 console.log(list);
-list.Unshift("Hey,")
-console.log(list);
+console.log(list.Get(0))
