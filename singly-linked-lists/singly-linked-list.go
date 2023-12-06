@@ -121,6 +121,7 @@ func (l *List) Get(idx int) *Node {
 	return currentNode
 }
 
+// Set method, takes an index and a value as arguments and replace the value of the node at the given index.
 func (l *List) Set(idx, val int) bool {
 	foundNode := l.Get(idx)
 	if foundNode != nil {
@@ -130,14 +131,38 @@ func (l *List) Set(idx, val int) bool {
 	return false
 }
 
+// Insert method, takes an index and value as argumetns and inserts a new node at the give index.
+func (l *List) Insert(idx, val int) bool {
+	if idx < 0 || idx > l.length {
+		return false
+	}
+	if idx == l.length {
+		l.Push(val)
+		return true
+	}
+	if idx == 0 {
+		l.Unshift(val)
+		return true
+	}
+	newNode := &Node{value: val}
+	prevNode := l.Get(val)
+	nextNode := prevNode.next
+	prevNode.next = newNode
+	newNode.next = nextNode
+	l.length++
+	return true
+}
+
 func main() {
 	sll := &List{}
 	sll.Push(0)
 	sll.Push(1)
 	sll.Push(2)
 	sll.Push(3)
+	fmt.Println("Initial list")
 	sll.Traverse()
-
-	fmt.Println(sll.Set(2, 5))
+	fmt.Println("----------------------------")
+	fmt.Println(sll.Insert(7, 5))
+	fmt.Println("Updated list")
 	sll.Traverse()
 }

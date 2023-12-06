@@ -115,6 +115,20 @@ class SinglyLinkedList {
         }
         return false;
     }
+
+    // Insert method, takes an index and value as argumetns and inserts a new node at the give index.
+    Insert(idx, val) {
+        if (idx < 0 || idx > this.length) return false;
+        if (idx === this.length) return !!this.Push(val);
+        if (idx === 0) return !!this.Unshift(val);
+        var newNode = new Node(val);
+        var prevNode = this.Get(idx - 1);
+        var nextNode = prevNode.next;
+        prevNode.next = newNode;
+        newNode.next = nextNode;
+        this.length++;
+        return true;
+    }
 }
 
 let list = new SinglyLinkedList();
@@ -123,6 +137,6 @@ list.Push(1);
 list.Push(2);
 list.Push(3);
 list.Push(4);
-console.log("Initial list", list.Traverse());
-console.log(list.Set(0, 100))
-console.log("Updated list", list.Traverse());
+console.log("Initial list", list.length, list.Traverse());
+console.log(list.Insert(-200, 100))
+console.log("Updated list", list.length, list.Traverse());
