@@ -3,6 +3,17 @@ package main
 
 import "fmt"
 
+// Node struct creates a new node for SLL.
+type Node struct {
+	value int
+	next  *Node
+}
+
+// Next method points to the next node linked to a given node.
+func (n *Node) Next() *Node {
+	return n.next
+}
+
 // List struct creates a type for SLL.
 type List struct {
 	head   *Node
@@ -110,24 +121,23 @@ func (l *List) Get(idx int) *Node {
 	return currentNode
 }
 
-// Node struct creates a new node for SLL.
-type Node struct {
-	value int
-	next  *Node
-}
-
-// Next method points to the next node linked to a given node.
-func (n *Node) Next() *Node {
-	return n.next
+func (l *List) Set(idx, val int) bool {
+	foundNode := l.Get(idx)
+	if foundNode != nil {
+		foundNode.value = val
+		return true
+	}
+	return false
 }
 
 func main() {
 	sll := &List{}
 	sll.Push(0)
 	sll.Push(1)
-	sll.Push(5)
+	sll.Push(2)
 	sll.Push(3)
 	sll.Traverse()
 
-	fmt.Println(sll.Get(2))
+	fmt.Println(sll.Set(2, 5))
+	sll.Traverse()
 }

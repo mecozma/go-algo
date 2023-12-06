@@ -15,6 +15,16 @@ class SinglyLinkedList {
         this.tail = null;
         this.length = 0;
     }
+
+    // Traverse method, prints all the nodes in the SLL.
+    Traverse() {
+        var currentNode = this.head;
+        if (this.length === 0) return null;
+        while (currentNode != null) {
+            console.log(currentNode)
+            currentNode = currentNode.next;
+        }
+    }
     // Push method takes a value as argumant and appends it at the end of the list.
     Push(val) {
         var newNode = new Node(val);
@@ -88,12 +98,22 @@ class SinglyLinkedList {
         var currentNode = this.head;
         var currentIdx = 0;
 
-        while(idx != currentIdx) {
-            
+        while (idx != currentIdx) {
+
             currentNode = currentNode.next;
             currentIdx++;
         }
         return currentNode
+    }
+
+    // Set method, takes an index and a value as arguments and replace the value of the node at the given index.
+    Set(idx, val) {
+        var foundNode = this.Get(idx);
+        if (foundNode) {
+            foundNode.val = val;
+            return true;
+        }
+        return false;
     }
 }
 
@@ -103,5 +123,6 @@ list.Push(1);
 list.Push(2);
 list.Push(3);
 list.Push(4);
-console.log(list);
-console.log(list.Get(0))
+console.log("Initial list", list.Traverse());
+console.log(list.Set(0, 100))
+console.log("Updated list", list.Traverse());
