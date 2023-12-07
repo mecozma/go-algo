@@ -171,6 +171,22 @@ func (l *List) Remove(idx int) *Node {
 	return removedNode
 }
 
+// Reverse methos, reverses the SLL.
+func (l *List) Reverse() *List {
+	node := l.head
+	l.head = l.tail
+	l.tail = node
+	var prevNode *Node
+	var nextNode *Node
+	for i := 0; i < l.length; i++ {
+		nextNode = node.next
+		node.next = prevNode
+		prevNode = node
+		node = nextNode
+	}
+	return l
+}
+
 func main() {
 	sll := &List{}
 	sll.Push(0)
@@ -182,7 +198,7 @@ func main() {
 	sll.Traverse()
 	fmt.Println("List length", sll.length)
 	fmt.Println("----------------------------")
-	fmt.Println("Removed node: ", sll.Remove(3))
+	sll.Reverse()
 	fmt.Println("----------------------------")
 	fmt.Println("Updated list")
 	sll.Traverse()

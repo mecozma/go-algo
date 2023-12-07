@@ -21,7 +21,7 @@ class SinglyLinkedList {
         var currentNode = this.head;
         if (this.length === 0) return null;
         while (currentNode != null) {
-            console.log(currentNode)
+            console.log(currentNode.val)
             currentNode = currentNode.next;
         }
     }
@@ -116,7 +116,7 @@ class SinglyLinkedList {
         return false;
     }
 
-    // Insert method, takes an index and value as argumetnts and inserts a new node at the give index.
+    // Insert method, takes an index and value as arguments and inserts a new node at the give index.
     Insert(idx, val) {
         if (idx < 0 || idx > this.length) return false;
         if (idx === this.length) return !!this.Push(val);
@@ -140,6 +140,22 @@ class SinglyLinkedList {
         this.lendth--;
         return removedNode;
     }
+
+    // Reverse methos, reverses the SLL.
+    Reverse() {
+        var node = this.head;
+        this.head = this.tail;
+        this.tail = this.head;
+        var nextNode;
+        var prevNode = null;
+        for (let i = 0; i < this.length; i++) {
+            nextNode = node.next;
+            node.next = prevNode;
+            prevNode = node;
+            node = nextNode;
+        }
+        return this;
+    }
 }
 
 let list = new SinglyLinkedList();
@@ -148,8 +164,8 @@ list.Push(1);
 list.Push(2);
 list.Push(3);
 list.Push(4);
-console.log("Initial list", list);
+console.log("Initial list", list.Traverse());
 console.log("*********************************************")
-console.log("Removed Node", list.Remove(5))
+console.log("Removed Node", list.Reverse())
 console.log("*********************************************")
-console.log("Updated list", list);
+console.log("Updated list", list.Traverse());
