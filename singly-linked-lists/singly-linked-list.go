@@ -153,16 +153,38 @@ func (l *List) Insert(idx, val int) bool {
 	return true
 }
 
+// Remove method, takes an index as argument, removes the node at the index and returns the node.
+func (l *List) Remove(idx int) *Node {
+	if idx < 0 || idx >= l.length {
+		return nil
+	}
+	if idx == 0 {
+		return l.Shift()
+	}
+	if idx == l.length-1 {
+		return l.Pop()
+	}
+	beforeNode := l.Get(idx - 1)
+	removedNode := beforeNode.next
+	beforeNode.next = removedNode.next
+	l.length--
+	return removedNode
+}
+
 func main() {
 	sll := &List{}
 	sll.Push(0)
 	sll.Push(1)
 	sll.Push(2)
 	sll.Push(3)
+	sll.Push(4)
 	fmt.Println("Initial list")
 	sll.Traverse()
+	fmt.Println("List length", sll.length)
 	fmt.Println("----------------------------")
-	fmt.Println(sll.Insert(7, 5))
+	fmt.Println("Removed node: ", sll.Remove(3))
+	fmt.Println("----------------------------")
 	fmt.Println("Updated list")
 	sll.Traverse()
+	fmt.Println("List length", sll.length)
 }

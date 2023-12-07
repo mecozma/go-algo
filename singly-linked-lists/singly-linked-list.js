@@ -116,7 +116,7 @@ class SinglyLinkedList {
         return false;
     }
 
-    // Insert method, takes an index and value as argumetns and inserts a new node at the give index.
+    // Insert method, takes an index and value as argumetnts and inserts a new node at the give index.
     Insert(idx, val) {
         if (idx < 0 || idx > this.length) return false;
         if (idx === this.length) return !!this.Push(val);
@@ -129,6 +129,17 @@ class SinglyLinkedList {
         this.length++;
         return true;
     }
+    // Remove method, takes an index as argument, removes the node at the index and returns the node.
+    Remove(idx) {
+        if (idx < 0 || idx >= this.length) return undefined;
+        if (idx === this.length - 1) return this.Pop();
+        if (idx === 0) return this.Shift();
+        var beforeNode = this.Get(idx - 1);
+        var removedNode = beforeNode.next;
+        beforeNode.Next = removedNode.next;
+        this.lendth--;
+        return removedNode;
+    }
 }
 
 let list = new SinglyLinkedList();
@@ -137,6 +148,8 @@ list.Push(1);
 list.Push(2);
 list.Push(3);
 list.Push(4);
-console.log("Initial list", list.length, list.Traverse());
-console.log(list.Insert(-200, 100))
-console.log("Updated list", list.length, list.Traverse());
+console.log("Initial list", list);
+console.log("*********************************************")
+console.log("Removed Node", list.Remove(5))
+console.log("*********************************************")
+console.log("Updated list", list);
