@@ -46,12 +46,33 @@ func (l *DoublyLinkedList) Push(n int) *DoublyLinkedList {
 	return l
 }
 
+// Pop method removes and returns the last node of dll.
+func (l *DoublyLinkedList) Pop() *Node {
+	if l.head == nil {
+		return nil
+	}
+	poppedNode := l.tail
+	if l.length == 1 {
+		l.head = nil
+		l.tail = nil
+	} else {
+		l.tail = poppedNode.prev
+		l.tail.next = nil
+		poppedNode.prev = nil
+	}
+	l.length--
+	return poppedNode
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
 	dll.Push(0)
 	dll.Push(1)
 
+	dll.Traverse()
+	fmt.Println(dll.Pop())
+	fmt.Println(dll.Pop())
 	dll.Traverse()
 
 }
