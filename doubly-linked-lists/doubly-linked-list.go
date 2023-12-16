@@ -64,6 +64,24 @@ func (l *DoublyLinkedList) Pop() *Node {
 	return poppedNode
 }
 
+// Shift method removes and returns the first element of a dll.
+func (l *DoublyLinkedList) Shift() *Node {
+	if l.length == 0 {
+		return nil
+	}
+	oldHead := l.head
+	if l.length == 1 {
+		l.head = nil
+		l.tail = nil
+	} else {
+		l.head = oldHead.next
+		l.head.prev = nil
+		oldHead.next = nil
+	}
+	l.length--
+	return oldHead
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
@@ -71,8 +89,7 @@ func main() {
 	dll.Push(1)
 
 	dll.Traverse()
-	fmt.Println(dll.Pop())
-	fmt.Println(dll.Pop())
+	fmt.Println(dll.Shift())
 	dll.Traverse()
 
 }
