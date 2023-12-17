@@ -79,11 +79,24 @@ class DoublyLinkedList {
     this.length--;
     return oldHead;
   }
+
+  // Unshift method takes a value as integer and adds a new node at the beginning of the sll  and returns the sll.
+  Unshift(val) {
+    var newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 var dll = new DoublyLinkedList();
 dll.Push(0);
-dll.Push(1);
-console.log("Shifted", dll.Shift());
-console.log(dll.Traverse());
 console.log(dll);
+console.log(dll.Unshift(1));

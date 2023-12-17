@@ -82,6 +82,21 @@ func (l *DoublyLinkedList) Shift() *Node {
 	return oldHead
 }
 
+// Unshift method takes a value as integer and adds a new node at the beginning of the sll  and returns the sll.
+func (l *DoublyLinkedList) Unshift(n int) *DoublyLinkedList {
+	newNode := &Node{value: n}
+	if l.head == nil {
+		l.head = newNode
+		l.tail = newNode
+	} else {
+		l.head.prev = newNode
+		newNode.next = l.head
+		l.head = newNode
+	}
+	l.length++
+	return l
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
@@ -89,7 +104,7 @@ func main() {
 	dll.Push(1)
 
 	dll.Traverse()
-	fmt.Println(dll.Shift())
+	fmt.Println(dll.Unshift(3))
 	dll.Traverse()
 
 }
