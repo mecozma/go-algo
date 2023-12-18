@@ -4,8 +4,8 @@
 class Node {
   constructor(val) {
     this.val = val;
-    this.next = null;
     this.prev = null;
+    this.next = null;
   }
 }
 
@@ -94,9 +94,34 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  // Get method gets an integer as input and return the node at the given index.
+  Get(idx) {
+    var count, current;
+    if (idx < 0 || idx >= this.length) return null;
+    if (idx <= this.length / 2) {
+      count = 0;
+      current = this.head;
+      while (count != idx) {
+        current = current.next;
+        count++;
+      }
+    } else {
+      count = this.length - 1;
+      current = this.tail;
+      while (count != idx) {
+        current = current.prev;
+        count--;
+      }
+    }
+    return current;
+  }
 }
 
 var dll = new DoublyLinkedList();
 dll.Push(0);
-console.log(dll);
-console.log(dll.Unshift(1));
+dll.Push(1);
+dll.Push(2);
+dll.Push(3);
+dll.Push(4);
+console.log(dll.Get(3));

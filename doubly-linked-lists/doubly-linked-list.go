@@ -4,8 +4,8 @@ import "fmt"
 
 type Node struct {
 	value int
-	next  *Node
 	prev  *Node
+	next  *Node
 }
 
 type DoublyLinkedList struct {
@@ -97,14 +97,40 @@ func (l *DoublyLinkedList) Unshift(n int) *DoublyLinkedList {
 	return l
 }
 
+// Get method gets an integer as input and return the node at the given index.
+func (l *DoublyLinkedList) Get(idx int) *Node {
+	var count int
+	var current *Node
+	if idx < 0 || idx >= l.length {
+		return nil
+	}
+	if idx < int(l.length/2) {
+		count = 0
+		current = l.head
+		for count != idx {
+			current = current.next
+			count++
+		}
+	} else {
+		count = l.length - 1
+		current = l.tail
+		for count != idx {
+			current = current.prev
+			count--
+		}
+	}
+	return current
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
 	dll.Push(0)
 	dll.Push(1)
+	dll.Push(2)
+	dll.Push(3)
+	dll.Push(4)
 
-	dll.Traverse()
-	fmt.Println(dll.Unshift(3))
-	dll.Traverse()
+	fmt.Println(dll.Get(3))
 
 }
