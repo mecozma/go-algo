@@ -122,6 +122,16 @@ func (l *DoublyLinkedList) Get(idx int) *Node {
 	return current
 }
 
+// Set method takes an index and a value as input and replaces the value of the node at the given index.
+func (l DoublyLinkedList) Set(idx, val int) bool {
+	updatedNode := l.Get(idx)
+	if updatedNode != nil {
+		updatedNode.value = val
+		return true
+	}
+	return false
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
@@ -131,6 +141,7 @@ func main() {
 	dll.Push(3)
 	dll.Push(4)
 
-	fmt.Println(dll.Get(3))
+	fmt.Println(dll.Set(10, 9))
+	dll.Traverse()
 
 }

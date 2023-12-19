@@ -116,6 +116,16 @@ class DoublyLinkedList {
     }
     return current;
   }
+
+  // Set method takes an index and a value as input and replaces the value of the node at the given index.
+  Set(idx, val) {
+    var updatedNode = this.Get(idx);
+    if (updatedNode) {
+      updatedNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 var dll = new DoublyLinkedList();
@@ -124,4 +134,5 @@ dll.Push(1);
 dll.Push(2);
 dll.Push(3);
 dll.Push(4);
-console.log(dll.Get(3));
+console.log(dll.Set(3, 8));
+console.log(dll.Traverse());
