@@ -132,6 +132,29 @@ func (l DoublyLinkedList) Set(idx, val int) bool {
 	return false
 }
 
+// Insert method takes an index and a value as arguments and inserts a new node at the given index.
+func (l DoublyLinkedList) Insert(idx, val int) bool {
+	newNode := &Node{value: val}
+	if idx < 0 || idx > l.length {
+		return false
+	}
+	if idx == 0 {
+		l.Unshift(val)
+		return true
+	}
+	if idx == l.length {
+		l.Push(val)
+	}
+	beforeNode := l.Get(idx - 1)
+	afterNode := beforeNode.next
+	beforeNode.next = newNode
+	newNode.prev = beforeNode
+	newNode.next = afterNode
+	afterNode.prev = newNode
+	l.length++
+	return true
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
@@ -141,7 +164,7 @@ func main() {
 	dll.Push(3)
 	dll.Push(4)
 
-	fmt.Println(dll.Set(10, 9))
+	fmt.Println(dll.Insert(1, 9))
 	dll.Traverse()
 
 }

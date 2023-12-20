@@ -120,11 +120,27 @@ class DoublyLinkedList {
   // Set method takes an index and a value as input and replaces the value of the node at the given index.
   Set(idx, val) {
     var updatedNode = this.Get(idx);
-    if (updatedNode) {
+    if (updatedNode != null) {
       updatedNode.val = val;
       return true;
     }
     return false;
+  }
+
+  // Insert method takes an index and a value as arguments and inserts a new node at the given index.
+  Insert(idx, val) {
+    var newNode = new Node(val);
+    if (idx < 0 || idx > this.length) return false;
+    if (idx === 0) return !!this.Unshift(val);
+    if (idx === this.length) return !!this.Push(val);
+    var beforeNode = this.Get(idx - 1);
+    var afterNode = beforeNode.next;
+    beforeNode.next = newNode;
+    newNode.prev = beforeNode;
+    newNode.next = afterNode;
+    afterNode.prev = newNode;
+    this.length++;
+    return true;
   }
 }
 
@@ -134,5 +150,5 @@ dll.Push(1);
 dll.Push(2);
 dll.Push(3);
 dll.Push(4);
-console.log(dll.Set(3, 8));
+console.log(dll.Insert(2, 9));
 console.log(dll.Traverse());
