@@ -155,6 +155,28 @@ func (l DoublyLinkedList) Insert(idx, val int) bool {
 	return true
 }
 
+// Remove method takes an index as argument, removes and returns the node at that index.
+func (l *DoublyLinkedList) Remove(idx int) *Node {
+	if idx < 0 || idx >= l.length {
+		return nil
+	}
+	if idx == 0 {
+		return l.Shift()
+	}
+	if idx == l.length-1 {
+		return l.Pop()
+	}
+	removedNode := l.Get(idx)
+	beforeNode := removedNode.prev
+	afterNode := removedNode.next
+	beforeNode.next = afterNode
+	afterNode.prev = beforeNode
+	removedNode.prev = nil
+	removedNode.next = nil
+	l.length--
+	return removedNode
+}
+
 func main() {
 	dll := &DoublyLinkedList{}
 
@@ -164,7 +186,7 @@ func main() {
 	dll.Push(3)
 	dll.Push(4)
 
-	fmt.Println(dll.Insert(1, 9))
+	fmt.Println(dll.Remove(3))
 	dll.Traverse()
 
 }

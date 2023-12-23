@@ -142,6 +142,22 @@ class DoublyLinkedList {
     this.length++;
     return true;
   }
+
+  // Remove method takes an index as argument, removes and returns the node at that index.
+  Remove(idx) {
+    if (idx < 0 || idx >= this.length) return null;
+    if (idx == 0) return this.Shift();
+    if (idx == this.length - 1) return this.Pop();
+    var removedNode = this.Get(idx);
+    var beforeNode = removedNode.prev;
+    var afterNode = removedNode.next;
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
+  }
 }
 
 var dll = new DoublyLinkedList();
@@ -150,5 +166,6 @@ dll.Push(1);
 dll.Push(2);
 dll.Push(3);
 dll.Push(4);
-console.log(dll.Insert(2, 9));
+console.log(dll.Remove(2), this);
 console.log(dll.Traverse());
+console.log(dll);
