@@ -52,6 +52,20 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+  shift() {
+    var returnedNode = this.head;
+    if (this.head === null) return undefined;
+    if (this.length === 1) {
+      this.head = 0;
+      this.tail = 0;
+    } else {
+      this.head = returnedNode.next;
+      this.head.prev = null;
+      returnedNode.next = null;
+    }
+    this.length--;
+    return returnedNode;
+  }
 }
 
 var l = new DoublyLinkedList();
@@ -59,5 +73,5 @@ l.push(0);
 l.push(1);
 l.push(2);
 l.push(3);
-l.unshift(9);
+console.log(l.shift());
 l.traverse();

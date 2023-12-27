@@ -58,6 +58,23 @@ func (l *DLL) Unshift(n int) *DLL {
 	return l
 }
 
+func (l *DLL) Shift() *Node {
+	shiftedNode := l.head
+	if l.head == nil {
+		return nil
+	}
+	if l.length == 1 {
+		l.head = nil
+		l.tail = nil
+	} else {
+		l.head = shiftedNode.next
+		l.head.prev = nil
+		shiftedNode.next = nil
+	}
+	l.length--
+	return shiftedNode
+}
+
 func main() {
 	d := &DLL{}
 
@@ -65,7 +82,7 @@ func main() {
 	d.Push(1)
 	d.Push(2)
 	d.Push(3)
-	d.Unshift(9)
+	d.Shift()
 
 	d.Traverse()
 }
