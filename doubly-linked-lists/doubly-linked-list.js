@@ -166,6 +166,6 @@ dll.Push(1);
 dll.Push(2);
 dll.Push(3);
 dll.Push(4);
-console.log(dll.Remove(2), this);
+console.log(dll.Set(2, 9));
 console.log(dll.Traverse());
 console.log(dll);

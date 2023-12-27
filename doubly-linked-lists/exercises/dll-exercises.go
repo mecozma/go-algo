@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	value int
@@ -75,6 +77,32 @@ func (l *DLL) Shift() *Node {
 	return shiftedNode
 }
 
+func (l *DLL) Set(idx, val int) bool {
+	var currentNode *Node
+	var counter int
+
+	if idx < 0 || idx >= l.length {
+		return false
+	}
+	if idx <= int(l.length/2) {
+		currentNode = l.head
+		counter = 0
+		for counter != idx {
+			currentNode = currentNode.next
+			counter++
+		}
+	} else {
+		currentNode = l.tail
+		counter = l.length - 1
+		for counter != idx {
+			currentNode = currentNode.prev
+			counter--
+		}
+	}
+	currentNode.value = val
+	return true
+}
+
 func main() {
 	d := &DLL{}
 
@@ -82,7 +110,7 @@ func main() {
 	d.Push(1)
 	d.Push(2)
 	d.Push(3)
-	d.Shift()
+	d.Set(2, 9)
 
 	d.Traverse()
 }
