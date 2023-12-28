@@ -103,6 +103,34 @@ func (l *DLL) Set(idx, val int) bool {
 	return true
 }
 
+func (l *DLL) Remove(idx int) *Node {
+	removedNode := l.head
+	counter := 0
+	if idx < 0 || idx >= l.length {
+		return nil
+	}
+	if idx == l.length-1 {
+		removedNode = l.tail
+		removedNode.prev = l.tail
+		l.tail.next = nil
+		removedNode.prev = nil
+		removedNode.next = nil
+		return removedNode
+	}
+	for counter != idx {
+		removedNode = removedNode.next
+		counter++
+	}
+	beforeNode := removedNode.prev
+	afterNode := removedNode.next
+	beforeNode.next = afterNode
+	afterNode.prev = beforeNode
+	removedNode.prev = nil
+	removedNode.next = nil
+	l.length--
+	return removedNode
+}
+
 func main() {
 	d := &DLL{}
 
@@ -110,7 +138,7 @@ func main() {
 	d.Push(1)
 	d.Push(2)
 	d.Push(3)
-	d.Set(2, 9)
+	d.Remove(0)
 
 	d.Traverse()
 }

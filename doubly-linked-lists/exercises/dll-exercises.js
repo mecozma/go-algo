@@ -88,6 +88,32 @@ class DoublyLinkedList {
     currentNode.value = val;
     return true;
   }
+  remove(idx) {
+    var counter;
+    var currentNode;
+    if (idx < 0 || idx >= this.length) return undefined;
+    if (idx === this.length - 1) {
+      currentNode = this.tail;
+      currentNode.prev = this.tail;
+      this.tail.next = null;
+      currentNode.prev = null;
+      currentNode.next = null;
+      this.length--;
+      return currentNode;
+    }
+    while (counter != idx) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    var previousNode = currentNode.prev;
+    var afterNode = currentNode.next;
+    previousNode.next = afterNode;
+    afterNode.prev = previousNode;
+    currentNode.prev = null;
+    currentNode.next = null;
+    this.length--;
+    return currentNode;
+  }
 }
 
 var l = new DoublyLinkedList();
@@ -95,5 +121,7 @@ l.push(0);
 l.push(1);
 l.push(2);
 l.push(3);
-console.log(l.set(0, 9))
+l.set(0, 9);
+l.traverse();
+console.log(l.remove(0));
 l.traverse();
