@@ -53,6 +53,20 @@ class BST {
     }
     return found;
   }
+  breathFirstSearch() {
+    var node = this.root;
+    var data = [];
+    var queue = [];
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node.value);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    console.log("done");
+    return data;
+  }
 }
 
 var tree = new BST();
@@ -60,5 +74,4 @@ console.log(tree.insert(10));
 console.log(tree.insert(9));
 console.log(tree.insert(11));
 console.log(tree.insert(33));
-console.log(tree.find(33));
-console.log(tree.find(1));
+console.log(tree.breathFirstSearch());

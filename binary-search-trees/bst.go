@@ -62,6 +62,25 @@ func printNode(n *Node) {
 	printNode(n.right)
 }
 
+func bfs(root *Node) []int {
+	values := make([]int, 0, 0)
+	queue := []*Node{}
+	r := root
+	queue = append(queue, r)
+	for len(queue) != 0 {
+		r = queue[0]
+		queue = queue[1:]
+		values = append(values, r.value)
+		if r.left != nil {
+			queue = append(queue, r.left)
+		}
+		if r.right != nil {
+			queue = append(queue, r.right)
+		}
+	}
+	return values
+}
+
 func main() {
 	t := &Tree{}
 	t.insert(10).
@@ -71,7 +90,5 @@ func main() {
 		insert(40).
 		insert(1).
 		insert(60)
-	printNode(t.node)
-	fmt.Println(t.node.exists(10))
-	fmt.Println(t.node.exists(55))
+	fmt.Println(bfs(t.node))
 }
