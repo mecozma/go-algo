@@ -67,6 +67,17 @@ class BST {
     console.log("done");
     return data;
   }
+  dfsPreorder() {
+    var visited = [];
+    var current = this.root;
+     function preorderHelper(node) {
+      visited.push(node.value);
+       if (node.left) preorderHelper(node.left);
+       if (node.right) preorderHelper(node.right);
+    }
+    preorderHelper(current);
+    return visited;
+  }
 }
 
 var tree = new BST();
@@ -74,4 +85,4 @@ console.log(tree.insert(10));
 console.log(tree.insert(9));
 console.log(tree.insert(11));
 console.log(tree.insert(33));
-console.log(tree.breathFirstSearch());
+console.log(tree.dfsPreorder());

@@ -81,6 +81,15 @@ func bfs(root *Node) []int {
 	return values
 }
 
+func preorderTraversal(root *Node) {
+	if root == nil {
+		return
+	}
+	fmt.Println(root.value)
+	preorderTraversal(root.left)
+	preorderTraversal(root.right)
+}
+
 func main() {
 	t := &Tree{}
 	t.insert(10).
@@ -90,5 +99,5 @@ func main() {
 		insert(40).
 		insert(1).
 		insert(60)
-	fmt.Println(bfs(t.node))
+	preorderTraversal(t.node)
 }
